@@ -1,0 +1,9 @@
+Django
+requests
+numpy==1.18.3
+pandas
+beautifulsoup4
+selenium
+
+# PostgreSQLに接続するドライバ
+psycopg2
