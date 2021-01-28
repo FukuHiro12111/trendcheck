@@ -59,8 +59,10 @@ DATABASES = {
 }
 ```
 
+## bash
+
 ```bash:bash
 $ docker-compose run web django-admin.py startproject project .
 $ docker-compose up -d
-
+$ docker-compose run web python manage.py startapp news
 ```
