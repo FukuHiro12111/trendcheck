@@ -10,4 +10,9 @@ class GetNews(object):
         load_url = requests.get("https://news.yahoo.co.jp/")
         # webページの解析
         soup = BeautifulSoup(load_url.text, "html.parser")
+        # テキスト取得
+        hrefs = [elem['href'] for elem in soup.find(
+                'div', class_="sc-dYzWWc eYHtfd").find('ul').find_all('a')]
+        titles = [elem.text for elem in soup.find(
+                'div', class_="sc-dYzWWc eYHtfd").find('ul').find_all('a')]
 
