@@ -66,3 +66,10 @@ $ docker-compose run web django-admin.py startproject project .
 $ docker-compose up -d
 $ docker-compose run web python manage.py startapp news
 ```
+
+## マイグレーション
+
+```bash:bash
+$ docker-compose run web python3 manage.py makemigrations
+$ docker-compose run web python3 manage.py migrate
+```
