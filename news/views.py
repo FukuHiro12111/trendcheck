@@ -1,9 +1,11 @@
-from django.http import HttpResponse
+import json
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 import requests
 from bs4 import BeautifulSoup
 from .models import News
 from django.views.generic import ListView
+
 
 
 def top_url(request):
@@ -23,8 +25,10 @@ def get_news_information(request):
             'div', class_="sc-dYzWWc eYHtfd").find('ul').find_all('a')]
 
     content = {'list': zip(titles, urls),}
-
+    # json_str = json.dumps(content, ensure_ascii=False)
     return HttpResponse(content)
+    # return JsonResponse(json_str)
+    # return render(request, 'news/news_list.html')
     
 
 # class GetNewsView(object):
