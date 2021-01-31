@@ -24,10 +24,10 @@ def get_news_information(request):
     titles = [elem.text for elem in soup.find(
             'div', class_="sc-dYzWWc eYHtfd").find('ul').find_all('a')]
 
-    content = {'list': zip(titles, urls),}
-    # json_str = json.dumps(content, ensure_ascii=False)
-    return HttpResponse(content)
-    # return JsonResponse(json_str)
+    # zip関数をlistにキャスト
+    content = {'list': list(zip(titles, urls)),}
+
+    return JsonResponse(content)
     # return render(request, 'news/news_list.html')
     
 

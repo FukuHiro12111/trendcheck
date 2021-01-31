@@ -1,23 +1,24 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="btn-yahoo-news">
-  <button type="submit" class="btn btn-primary" id="yahoo_button">
-    Yahooニュース
-  </button>
+  <button class="btn btn-primary" id="yahoo_button">Yahooニュース</button>
+  <br /><br />
 
   <div class="container" id="post">
     <ul class="list-group list-group-flush">
       <table border="2">
+        <!-- <thead> -->
         <tr>
           <th>タイトル</th>
-          <th></th>
         </tr>
-        {% for title, url in list %}
-        <tr>
-          <td><a href="{{ url }}">{{ title }}</a></td>
-          <td><button type="submit">保存</button></td>
-        </tr>
-        {% endfor %}
+        <!-- {% for title, url in list %}
+          <tr>
+            <td><a href="{{ url }}">{{ title }}</a></td>
+            <td><button type="submit">保存</button></td> 
+          </tr>
+          {% endfor %}-->
+        <!-- </thead> -->
+        <tbody id="usage-table-body"></tbody>
       </table>
     </ul>
   </div>
@@ -25,21 +26,42 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script type="text/javascript">
     $(() => {
-      $("button").click(() => {
+      $("#yahoo_button").click(() => {
         // Ajax通信を開始する
         $.ajax({
           type: "GET", // HTTPリクエストメソッドの指定
-          // dataType: "json", // 受信するデータタイプの指定
-          //data: button.serialize(), // クエリパラメータの指定。サーバーに送信したいデータを指定
+          dataType: "json", // 受信するデータタイプの指定
+          //data: yahoo_button.serialize(), // クエリパラメータの指定。サーバーに送信したいデータを指定
           url: "yahoo/",
-          success: (res) => {
+          success: (data) => {
             // $("#post").removeClass("container");
             // $("#post").addClass("container");
-            $("#post").text(res);
-            console.log("res", res.con);
+            $.each(data.list, (i, item) => {
+              console.log("item[i]", item[i]);
+              console.log("item", item);
+              console.log("i", i);
+              $("#usage-table-body").append(
+                '<tr><td><a href="' +
+                  item[1] +
+                  '">' +
+                  item[0] +
+                  "</a></td></tr>"
+              );
+            });
+
+            console.log("data", data);
+
+            //データをテーブル形式にする
+            // $.each(data, (i, item) => {
+            //   var text_table = item.list;
+            //   var tr = $("<tr />");
+            //   var text_list = $("<td />").text(text_table);
+            //   tr.append(text_list);
+            //   $("#usage-table-body").append(tr);
+            // });
           },
           error: () => {
-            console.log("失敗");
+            console.log("失敗", data);
           },
         });
       });
