@@ -1,3 +1,5 @@
+<!-- {% load static %} -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,10 +18,7 @@
       crossorigin="anonymous"
     />
 
-    <title>トレンドチェック</title>
-  </head>
-  <body>
-    {% block content %} {% endblock %}
+    <link rel="stylesheet" type=text/css href="{% static 'css/custom.css' %}" />
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -38,5 +37,37 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+
+    <title>トレンドチェック</title>
+  </head>
+  <body>
+    <!-- <nav class="navbar fixed-top navbar-dark bg-dark">
+      <a class="navbar-brand" id="yahoo_button" href="#">Yahooニュース</a>
+    </nav> -->
+    <nav class="navbar navbar-dark bg-dark">
+      <a href="#" class="navbar-brand">NewsCheck</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navmenu1"
+        aria-controls="navmenu1"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navmenu1">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" id="yahoo_button" href="#"
+            >Yahooニュース</a
+          >
+          <a class="nav-item nav-link" href="#">Menu#2</a>
+          <a class="nav-item nav-link" href="#">マイリスト</a>
+        </div>
+      </div>
+    </nav>
+
+    {% block content %} {% endblock %}
   </body>
 </html>
