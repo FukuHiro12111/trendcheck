@@ -59,15 +59,26 @@
       </button>
       <div class="collapse navbar-collapse" id="navmenu1">
         <div class="navbar-nav">
-          <a class="nav-item nav-link" id="yahoo_button" href="#"
-            >Yahooニュース</a
-          >
-          <a class="nav-item nav-link" href="#">Menu#2</a>
-          <a class="nav-item nav-link" href="#">マイリスト</a>
+          <a class="nav-item nav-link" id="yahoo" href="#">Yahooニュース</a>
+          <a class="nav-item nav-link" id="Qiita" href="#">Qiita</a>
+          <a class="nav-item nav-link" id="mylist" href="#">マイリスト</a>
         </div>
       </div>
     </nav>
-
+    <div class="yahoo section">
+      <ul class="list-group list-group-flush">
+        <table border="2">
+          <tbody id="yahoo-table-body"></tbody>
+        </table>
+      </ul>
+    </div>
+    <div class="mylist section">
+      <ul class="list-group list-group-flush">
+        <table border="2">
+          <tbody id="mylist-table-body"></tbody>
+        </table>
+      </ul>
+    </div>
     {% block content %} {% endblock %}
   </body>
 </html>

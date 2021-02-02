@@ -1,26 +1,30 @@
 {% extends 'base.html' %} {% block content %}
 
-<div class="btn-yahoo-news">
-  <button type="submit" class="btn btn-primary" id="yahoo_button">
-    Yahooニュース
-  </button>
+<div class="btn-mylist">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script type="text/javascript">
     $(() => {
-      $("button").click(() => {
-        // Ajax通信を開始する
-        $.ajax({
-          type: "GET",
+      $("#mylist").on("click", () => {
+        console.log(this.attr("id"));
+        // クリックした要素の ID と違うクラス名のセクションを非表示
+        $(".yahoo section")
+          .not($("." + $(this).attr("id")))
+          .hide();
 
-          url: "yahoo/",
-          success: (data) => {
-            console.log("成功");
-            $("#yahoo_button").load("news_list.html");
-          },
-          error: () => {
-            console.log("失敗");
-          },
-        });
+        // // クリックした要素の ID と同じクラスのセクションを表示
+        // $("." + $(this).attr("id")).show();
+        // // Ajax通信を開始する
+        // $.ajax({
+        //   type: "GET",
+        //   url: "yahoo/",
+        //   success: (data) => {
+        //     console.log("成功");
+        //     $("#yahoo_button").load("news_list.html");
+        //   },
+        //   error: () => {
+        //     console.log("失敗");
+        //   },
+        // });
       });
     });
   </script>

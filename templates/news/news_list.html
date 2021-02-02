@@ -3,21 +3,19 @@
 {% block content %}
 
 <div class="btn-yahoo-news">
-  <!-- <button class="btn btn-primary" id="yahoo_button">Yahooニュース</button>
-  <br /><br /> -->
-
-  <div class="container" id="post">
-    <ul class="list-group list-group-flush">
-      <table border="2">
-        <tbody id="usage-table-body"></tbody>
-      </table>
-    </ul>
-  </div>
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script type="text/javascript">
     $(() => {
-      $("#yahoo_button").one("click", () => {
+      $("#yahoo").on("click", function () {
+        // クリックした要素の ID と違うクラス名のセクションを非表示
+        // セクションはボタン id と同じクラス名になっているので、 '.' をつける。
+        // $(".section")
+        //   .not($("." + $(this).attr("id")))
+        //   .hide();
+        // クリックした要素の ID と同じクラスのセクションを表示
+        // $("." + $(this).attr("id")).show();
+        $(".y").remove();
+
         // Ajax通信を開始する
         $.ajax({
           type: "GET", // HTTPリクエストメソッドの指定
@@ -25,24 +23,46 @@
           //data: yahoo_button.serialize(), // クエリパラメータの指定。サーバーに送信したいデータを指定
           url: "yahoo/",
           success: (data) => {
-            $("#usage-table-body").append(
-              "<tr><th>タイトル</th><th></th></tr>"
+            $("#yahoo-table-body").append(
+              '<tr class="y"><th>Yahoo ニュース</th><th></th></tr>'
             );
             $.each(data.list, (i, item) => {
-              $("#usage-table-body").append(
-                '<tr><td><a href="' +
+              $("#yahoo-table-body").append(
+                '<tr class="y"><td><a href="' +
                   item[1] +
                   '">' +
                   item[0] +
-                  '</a></td><td><button type="submit">保存' +
-                  "</button></td></tr>"
+                  '</a></td><td><button type="submit">保存</button></td></tr>'
               );
             });
+            console.log($("#yahoo-table-body"));
           },
           error: () => {
             console.log("失敗", data);
           },
         });
+      });
+    });
+
+    $(() => {
+      $("#mylist").on("click", () => {
+        console.log("id", $("." + $(this).attr("id")));
+        $(".y").remove();
+
+        // // クリックした要素の ID と同じクラスのセクションを表示
+        // $("." + $(this).attr("id")).show();
+        // // Ajax通信を開始する
+        // $.ajax({
+        //   type: "GET",
+        //   url: "yahoo/",
+        //   success: (data) => {
+        //     console.log("成功");
+        //     $("#yahoo_button").load("news_list.html");
+        //   },
+        //   error: () => {
+        //     console.log("失敗");
+        //   },
+        // });
       });
     });
   </script>
