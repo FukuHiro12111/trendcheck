@@ -65,22 +65,23 @@
         </div>
       </div>
     </nav>
-    <form method="post">
-      <div class="yahoo section">
-        <ul class="list-group list-group-flush">
-          <table border="1">
-            <tbody id="yahoo-table-body"></tbody>
-          </table>
-        </ul>
-      </div>
-      <div class="qiita section">
-        <ul class="list-group list-group-flush">
-          <table border="2">
-            <tbody id="qiita-table-body"></tbody>
-          </table>
-        </ul>
-      </div>
-    </form>
+
+    <div class="yahoo section">
+      <ul class="list-group list-group-flush">
+        <table border="1">
+          <tbody id="yahoo-table-body"></tbody>
+        </table>
+      </ul>
+    </div>
+    <div class="qiita section">
+      <ul class="list-group list-group-flush">
+        <table border="2">
+          <tbody id="qiita-table-body"></tbody>
+        </table>
+      </ul>
+    </div>
+    <div class="loading hide"></div>
+
     {% block content %} {% endblock %}
   </body>
 </html>

@@ -21,7 +21,12 @@
           dataType: "json", // 受信するデータタイプの指定
           //data: yahoo_button.serialize(), // クエリパラメータの指定。サーバーに送信したいデータを指定
           url: "yahoo/",
+          //リクエストが完了するまで実行される
+          beforeSend: function () {
+            $(".loading").removeClass("hide");
+          },
           success: (data) => {
+            $(".loading").addClass("hide");
             $("#yahoo-table-body").append(
               '<tr class="y"><th>Yahoo ニュース</th></tr>'
             );
@@ -57,7 +62,11 @@
           dataType: "json", // 受信するデータタイプの指定
           //data: yahoo_button.serialize(), // クエリパラメータの指定。サーバーに送信したいデータを指定
           url: "qiita/",
+          beforeSend: function () {
+            $(".loading").removeClass("hide");
+          },
           success: (data) => {
+            $(".loading").addClass("hide");
             $("#qiita-table-body").append('<tr class="q"><th>Qiita</th></tr>');
             $.each(data.list, (i, item) => {
               $("#qiita-table-body").append(
