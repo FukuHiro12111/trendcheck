@@ -1,0 +1,91 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<div class="btn-yahoo-news">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(() => {
+      $("#yahoo").on("click", function () {
+        // クリックした要素の ID と違うクラス名のセクションを非表示
+        // セクションはボタン id と同じクラス名になっているので、 '.' をつける。
+        // $(".section")
+        //   .not($("." + $(this).attr("id")))
+        //   .hide();
+        // クリックした要素の ID と同じクラスのセクションを表示
+        // $("." + $(this).attr("id")).show();
+        $(".y").remove();
+        $(".q").remove();
+
+        // Ajax通信を開始する
+        $.ajax({
+          type: "GET", // HTTPリクエストメソッドの指定
+          dataType: "json", // 受信するデータタイプの指定
+          //data: yahoo_button.serialize(), // クエリパラメータの指定。サーバーに送信したいデータを指定
+          url: "yahoo/",
+          //リクエストが完了するまで実行される
+          beforeSend: function () {
+            $(".loading").removeClass("hide");
+          },
+          success: (data) => {
+            $(".loading").addClass("hide");
+            $("#yahoo-table-body").append(
+              '<tr class="y"><th>Yahoo ニュース</th></tr>'
+            );
+            $.each(data.list, (i, item) => {
+              $("#yahoo-table-body").append(
+                '<tr class="y" id="' +
+                  i +
+                  '"><td><a href="' +
+                  item[1] +
+                  '">' +
+                  item[0] +
+                  "</a></td></tr>"
+              );
+            });
+            console.log($("#yahoo-table-body"));
+          },
+          error: () => {
+            console.log("失敗", data);
+          },
+        });
+      });
+    });
+
+    $(() => {
+      $("#qiita").on("click", () => {
+        console.log("id", $("." + $(this).attr("id")));
+        $(".y").remove();
+        $(".q").remove();
+
+        // Ajax通信を開始する
+        $.ajax({
+          type: "GET", // HTTPリクエストメソッドの指定
+          dataType: "json", // 受信するデータタイプの指定
+          //data: yahoo_button.serialize(), // クエリパラメータの指定。サーバーに送信したいデータを指定
+          url: "qiita/",
+          beforeSend: function () {
+            $(".loading").removeClass("hide");
+          },
+          success: (data) => {
+            $(".loading").addClass("hide");
+            $("#qiita-table-body").append('<tr class="q"><th>Qiita</th></tr>');
+            $.each(data.list, (i, item) => {
+              $("#qiita-table-body").append(
+                '<tr class="q" id="' +
+                  i +
+                  '"><td><a href="' +
+                  item[1] +
+                  '">' +
+                  item[0] +
+                  "</a></td></tr>"
+              );
+            });
+          },
+          error: () => {
+            console.log("失敗", data);
+          },
+        });
+      });
+    });
+  </script>
+</div>
+{% endblock content %}
