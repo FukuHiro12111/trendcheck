@@ -4,6 +4,6 @@ from . import views
 
 urlpatterns = [
     path('', views.top_url, name='index'),
-    # ajax処理
-    path('yahoo/', views.get_news_information, name='yahoo'),
+    path('yahoo/', views.get_news_information, name='yahoo'), # yahooニュース処理
+    path('qiita/', views.get_qiita_information, name='qiita'), # yahooニュース処理
 ]

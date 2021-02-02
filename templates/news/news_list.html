@@ -1,6 +1,4 @@
-{% extends 'base.html' %}
-<!-- {% load static %}  -->
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 
 <div class="btn-yahoo-news">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -15,6 +13,7 @@
         // クリックした要素の ID と同じクラスのセクションを表示
         // $("." + $(this).attr("id")).show();
         $(".y").remove();
+        $(".q").remove();
 
         // Ajax通信を開始する
         $.ajax({
@@ -24,15 +23,17 @@
           url: "yahoo/",
           success: (data) => {
             $("#yahoo-table-body").append(
-              '<tr class="y"><th>Yahoo ニュース</th><th></th></tr>'
+              '<tr class="y"><th>Yahoo ニュース</th></tr>'
             );
             $.each(data.list, (i, item) => {
               $("#yahoo-table-body").append(
-                '<tr class="y"><td><a href="' +
+                '<tr class="y" id="' +
+                  i +
+                  '"><td><a href="' +
                   item[1] +
                   '">' +
                   item[0] +
-                  '</a></td><td><button type="submit">保存</button></td></tr>'
+                  "</a></td></tr>"
               );
             });
             console.log($("#yahoo-table-body"));
@@ -45,24 +46,35 @@
     });
 
     $(() => {
-      $("#mylist").on("click", () => {
+      $("#qiita").on("click", () => {
         console.log("id", $("." + $(this).attr("id")));
         $(".y").remove();
+        $(".q").remove();
 
-        // // クリックした要素の ID と同じクラスのセクションを表示
-        // $("." + $(this).attr("id")).show();
-        // // Ajax通信を開始する
-        // $.ajax({
-        //   type: "GET",
-        //   url: "yahoo/",
-        //   success: (data) => {
-        //     console.log("成功");
-        //     $("#yahoo_button").load("news_list.html");
-        //   },
-        //   error: () => {
-        //     console.log("失敗");
-        //   },
-        // });
+        // Ajax通信を開始する
+        $.ajax({
+          type: "GET", // HTTPリクエストメソッドの指定
+          dataType: "json", // 受信するデータタイプの指定
+          //data: yahoo_button.serialize(), // クエリパラメータの指定。サーバーに送信したいデータを指定
+          url: "qiita/",
+          success: (data) => {
+            $("#qiita-table-body").append('<tr class="q"><th>Qiita</th></tr>');
+            $.each(data.list, (i, item) => {
+              $("#qiita-table-body").append(
+                '<tr class="q" id="' +
+                  i +
+                  '"><td><a href="' +
+                  item[1] +
+                  '">' +
+                  item[0] +
+                  "</a></td></tr>"
+              );
+            });
+          },
+          error: () => {
+            console.log("失敗", data);
+          },
+        });
       });
     });
   </script>
