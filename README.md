@@ -4,13 +4,13 @@
 
 # 使用技術 
 - フロント
- - HTML 
- - CSS(bootstrap4)
- - JavaScript(jquery)
+  - HTML 
+  - CSS(bootstrap4)
+  - JavaScript(jquery)
 - サーバーサイド
- - Python(Django)
+  - Python(Django)
 - 環境構築
- - docker
+  - docker
 
 
 # 環境構築
