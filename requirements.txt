@@ -4,6 +4,7 @@ numpy==1.18.3
 pandas
 beautifulsoup4
 selenium
+google-api-python-client
 
 # PostgreSQLに接続するドライバ
 psycopg2
