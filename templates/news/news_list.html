@@ -67,16 +67,24 @@
           },
           success: (data) => {
             $(".loading").addClass("hide");
-            $("#qiita-table-body").append('<tr class="q"><th>Qiita</th></tr>');
+            $("#qiita-table-body").append(
+              '<tr class="q"><th>Qiita</th><th></th></tr>'
+            );
             $.each(data.list, (i, item) => {
               $("#qiita-table-body").append(
                 '<tr class="q" id="' +
                   i +
-                  '"><td><a href="' +
+                  '"><form method="post" action="create_mylist">{% csrf_token %}<td><a href="' +
                   item[1] +
                   '">' +
                   item[0] +
-                  "</a></td></tr>"
+                  '<input type="hidden" name="title" value="{{' +
+                  item[0] +
+                  '}}">' +
+                  '<input type="hidden" name="link" value="{{' +
+                  item[1] +
+                  '}}">' +
+                  '</a></td><td><input type="submit" value="保存"></td></form></tr>'
               );
             });
           },
