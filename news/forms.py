@@ -6,4 +6,4 @@ class MylistNews(forms.ModelForm):
     class Meta:
         model = News
         # 使用するフィールド
-        fields = ('title', 'link',)
+        fields = ('title', 'link')

@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 import requests
 from bs4 import BeautifulSoup
@@ -53,20 +53,24 @@ def get_qiita_information(request):
     return JsonResponse(content)
 
 
-def post_mylist(request):
+def create(request):
+    '''Mylistの作成'''
     if request.method == "POST":
-        form = MylistNews(data=request.POST)
+        form = MylistNews(request.POST)
         if form.is_valid():
-            create_mylist = News.objects.create(title=request.POST['title'],
+            create_mylist = News(title=request.POST['title'],
                                                 link=request.POST['link'])
             create_mylist.save()
-    # return render(request, 'news/news_list.html')
+            return render(request, 'news/mylist.html')
+        else:
+            return HttpResponse("NOT ValueError")
+    else:
+        return HttpResponse("保存されていません")
 
 
-# def get_mylist(request):
-#     mylist = News.objects.all()
-#     content = {'list': mylist}
-#     return JsonResponse(content)
+class MyListView(ListView):
+    model = News
+
 
 # class NewsList(ListView):
 #     template_name = 'news/news_list.html'
