@@ -1,7 +1,15 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
+<table border="1">
+  <tr>
+    <th>タイトル</th>
+    <th></th>
+  </tr>
+  {% for mylist in object_list %}
+  <tr>
+    <td><a href="{{mylist.link}}">{{ mylist.title }}</a></td>
+    <td><input type="submit" value="削除" /></td>
+  </tr>
+  {% endfor %}
+</table>
 
-<div class="btn-scraping-news">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="../../static/js/ajax.js" defer></script>
-</div>
 {% endblock content %}

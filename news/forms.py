@@ -7,3 +7,4 @@ class MylistNews(forms.ModelForm):
         model = News
         # 使用するフィールド
         fields = ('title', 'link')
+        # ordering = ['-created_on']

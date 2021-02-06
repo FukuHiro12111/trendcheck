@@ -8,7 +8,7 @@ from .forms import MylistNews
 
 def top_url(request):
     '''トップページ'''
-    return render(request, 'news/news_list.html')
+    return render(request, 'news/scraping_list.html')
 
 
 def get_news_information(request):
@@ -61,18 +61,12 @@ def create(request):
             create_mylist = News(title=request.POST['title'],
                                                 link=request.POST['link'])
             create_mylist.save()
-            return render(request, 'news/mylist.html')
+            # status=204 is not return
+            return HttpResponse(status=204)           
         else:
-            return HttpResponse("NOT ValueError")
-    else:
-        return HttpResponse("保存されていません")
+            return HttpResponse(status=400)
 
 
 class MyListView(ListView):
     model = News
-
-
-# class NewsList(ListView):
-#     template_name = 'news/news_list.html'
-#     model = News
-#     return render(request,template_name)
+    ordering = ['-created_on']
